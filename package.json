@@ -1,0 +1,14 @@
+{
+  "name": "ft_linear_regression",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start:trainer": "node trainer/src/main.ts"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3"
+  }
+}
