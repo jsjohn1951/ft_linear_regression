@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start:trainer": "clear && mkdir models && node programs/trainer/src/main.ts",
+    "start:trainer": "clear && node programs/trainer/src/main.ts",
     "start:predictor": "clear && node programs/predictor/src/main.ts"
   },
   "dependencies": {
