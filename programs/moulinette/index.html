@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ft_linear_regression Visualizer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="font-family: sans-serif; background: #f4f4f9; padding: 40px;">
+    <div style="max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; shadow: 0 2px 10px rgba(0,0,0,0.1)">
+        <h2>Price vs Mileage Analysis</h2>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        async function init() {
+            const res = await fetch('./data/data.json');
+            const { points, thetas } = await res.json();
+
+            // Calculate line endpoints based on min/max mileage
+            const minX = Math.min(...points.map(p => p.x));
+            const maxX = Math.max(...points.map(p => p.x));
+            const lineData = [
+                { x: minX, y: thetas.theta0 + (thetas.theta1 * minX) },
+                { x: maxX, y: thetas.theta0 + (thetas.theta1 * maxX) }
+            ];
+
+            new Chart(document.getElementById('myChart'), {
+                data: {
+                    datasets: [{
+                        type: 'scatter',
+                        label: 'Actual Data (CSV)',
+                        data: points,
+                        backgroundColor: '#3498db'
+                    }, {
+                        type: 'line',
+                        label: 'Regression Line',
+                        data: lineData,
+                        borderColor: '#e74c3c',
+                        borderWidth: 3,
+                        pointRadius: 0, // Makes it a clean line
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { type: 'linear', title: { display: true, text: 'Mileage (km)' } },
+                        y: { title: { display: true, text: 'Price ($)' } }
+                    }
+                }
+            });
+        }
+        init();
+    </script>
+</body>
+</html>

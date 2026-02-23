@@ -10,6 +10,27 @@ export let model: DataModel = new DataModel();
  * saveModel
  * @description Saves the newly generated theta0, and theta1 as our model
  */
+export async function saveVisData(
+  data: { x: number; y: number }[],
+  modelName: string = "data.json",
+  dir: string = "programs/moulinette/data",
+) {
+  await mkdir(`./${dir}`, { recursive: true });
+  writeFile(
+    `${dir}/${modelName}`,
+    JSON.stringify({ points: data, thetas: model }),
+    (err) => {
+      if (err) throw err;
+      console.log("The file has been saved!");
+    },
+  );
+  console.log("Data saved to data.json");
+}
+
+/**
+ * saveModel
+ * @description Saves the newly generated theta0, and theta1 as our model
+ */
 export async function saveModel(
   modelName: string = "model.json",
   dir: string = "models",
