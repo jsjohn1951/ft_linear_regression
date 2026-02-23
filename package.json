@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start:trainer": "node trainer/src/main.ts"
+    "start:trainer": "clear && node programs/trainer/src/main.ts",
+	"start:predictor": "clear && node programs/predictor/src/main.ts"
   },
   "dependencies": {
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "inquirer": "^13.3.0"
   },
   "devDependencies": {
     "@types/node": "^25.2.3"
